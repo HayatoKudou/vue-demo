@@ -73,12 +73,10 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'todo-created']);
 
-// モーダルを閉じる
 const closeModal = () => {
   emit('update:modelValue', false);
 };
 
-// フォームデータの初期化
 const todoData = ref<TodoPostData>({
   title: '',
   description: '',
@@ -86,25 +84,18 @@ const todoData = ref<TodoPostData>({
   completed: false
 });
 
-// フォーム送信処理
 const createTodo = async () => {
   try {
     const response = await TodoControllerService.post(todoData.value);
     console.log('Todo作成成功:', response);
-    
-    // 成功イベントを発火
     emit('todo-created', response);
-    
-    // フォームをリセットしてモーダルを閉じる
     resetForm();
     closeModal();
   } catch (error) {
     console.error('Todo作成エラー:', error);
-    // エラー通知などの処理をここに実装
   }
 };
 
-// フォームリセット
 const resetForm = () => {
   todoData.value = {
     title: '',
@@ -114,7 +105,6 @@ const resetForm = () => {
   };
 };
 
-// モーダルが開かれたときにフォームをリセット
 watch(() => props.modelValue, (newVal) => {
   if (newVal) {
     resetForm();

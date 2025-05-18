@@ -46,7 +46,6 @@ const loading = ref(true);
 const error = ref<string | null>(null);
 const todos = ref<TodoDTO[]>([]);
 
-// Todoデータ取得
 const fetchTodos = async () => {
   loading.value = true;
   error.value = null;
@@ -60,12 +59,10 @@ const fetchTodos = async () => {
   }
 };
 
-// 外部からアクセスできるようにメソッドを公開
 defineExpose({
   fetchTodos
 });
 
-// 日付フォーマット
 const formatDate = (dateString: string | undefined): string => {
   if (!dateString) return '未設定';
   
@@ -94,15 +91,11 @@ const editTodo = (todo: TodoDTO, index: number) => {
   console.log('編集:', todo);
 };
 
-// Todo削除
 const deleteTodo = (todo: TodoDTO, index: number) => {
-  // 削除機能の実装（将来の機能）
   console.log('削除:', todo);
-  
   // 確認ダイアログを表示してから削除するなどの処理を追加
 };
 
-// コンポーネントマウント時にデータ取得
 onMounted(fetchTodos);
 </script>
 
