@@ -62,8 +62,8 @@
 
 <script setup lang="ts">
 import { ref, defineEmits, defineProps, watch } from 'vue';
-import { TodoPostData } from '../api/generated/models/TodoPostData';
-import { TodoControllerService } from '../api/generated/services/TodoControllerService';
+import { TodoPostData } from '../../api/generated/models/TodoPostData';
+import { TodoControllerService } from '../../api/generated/services/TodoControllerService';
 
 // フォーム用の拡張された型
 interface TodoFormData extends TodoPostData {

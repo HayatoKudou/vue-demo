@@ -1,9 +1,9 @@
 import Router, { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Todo from './components/Todo.vue'
+import Todo from './components/Todo/Todo.vue'
 
 const routes = [
     {
-        path: '/test',
+        path: '/x-login',
         name: 'home',
         component: Todo
     }

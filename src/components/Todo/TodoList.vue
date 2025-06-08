@@ -39,8 +39,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, defineExpose } from 'vue';
-import { TodoControllerService } from '../api/generated/services/TodoControllerService';
-import { TodoDTO } from '../api/generated/models/TodoDTO';
+import { TodoControllerService } from '../../api/generated/services/TodoControllerService';
+import { TodoDTO } from '../../api/generated/models/TodoDTO';
 
 const loading = ref(true);
 const error = ref<string | null>(null);
