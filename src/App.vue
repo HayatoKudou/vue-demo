@@ -1,7 +1,7 @@
-<script setup>
-import Todo from './components/Todo/Todo.vue'
-</script>
-
 <template>
-    <Todo />
+  <div class="app">
+    <RouterView v-slot="{ Component }">
+      <Component :is="Component" />
+    </RouterView>
+  </div>
 </template>

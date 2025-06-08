@@ -1,11 +1,17 @@
 import Router, { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Todo from './components/Todo/Todo.vue'
+import XLogin from './components/X/XLogin.vue'
 
 const routes = [
     {
-        path: '/x-login',
-        name: 'home',
+        path: '/',
+        // name: 'Todo',
         component: Todo
+    },
+    {
+        path: '/x-login',
+        // name: 'X Login',
+        component: XLogin
     }
 ]
 
