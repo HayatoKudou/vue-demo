@@ -40,14 +40,15 @@
           />
         </div>
         
+        
         <div class="form-check">
           <input 
-            id="completed" 
-            v-model="todoData.completed" 
+            id="aiAnalysis" 
+            v-model="todoData.isAiAnalysisEnabled" 
             type="checkbox" 
             class="form-check-input"
           />
-          <label for="completed" class="form-check-label">完了済み</label>
+          <label for="aiAnalysis" class="form-check-label">AI分析を使用する</label>
         </div>
         
         <div class="form-actions">
@@ -64,6 +65,11 @@ import { ref, defineEmits, defineProps, watch } from 'vue';
 import { TodoPostData } from '../api/generated/models/TodoPostData';
 import { TodoControllerService } from '../api/generated/services/TodoControllerService';
 
+// フォーム用の拡張された型
+interface TodoFormData extends TodoPostData {
+  isAiAnalysisEnabled: boolean;
+}
+
 const props = defineProps({
   modelValue: {
     type: Boolean,
@@ -77,16 +83,24 @@ const closeModal = () => {
   emit('update:modelValue', false);
 };
 
-const todoData = ref<TodoPostData>({
+const todoData = ref<TodoFormData>({
   title: '',
   description: '',
   dueDate: '',
-  completed: false
+  isAiAnalysisEnabled: false
 });
 
 const createTodo = async () => {
   try {
-    const response = await TodoControllerService.post(todoData.value);
+    // APIリクエスト用のデータを作成（isAiAnalysisEnabledも含む）
+    const requestData = {
+      title: todoData.value.title,
+      description: todoData.value.description,
+      dueDate: todoData.value.dueDate,
+      isAiAnalysisEnabled: todoData.value.isAiAnalysisEnabled
+    };
+    
+    const response = await TodoControllerService.post(requestData as any);
     console.log('Todo作成成功:', response);
     emit('todo-created', response);
     resetForm();
@@ -101,7 +115,7 @@ const resetForm = () => {
     title: '',
     description: '',
     dueDate: '',
-    completed: false
+    isAiAnalysisEnabled: false
   };
 };
 
